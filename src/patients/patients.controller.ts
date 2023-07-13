@@ -1,11 +1,29 @@
-import { Controller, Get, Req, Headers } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Req,
+  Headers,
+  Post,
+  Body,
+  HttpException,
+  HttpStatus,
+} from '@nestjs/common';
+import { PatientsService } from './patients.service';
 
 @Controller('patients')
 export class PatientsController {
+  constructor(private patientService: PatientsService) {}
+
+  @Post()
+  create(@Body() patient: Body) {
+    const res = this.patientService.add(patient);
+    return res;
+  }
+
   @Get()
-  findAll(@Req() req: Request, @Headers() head: Headers): Object {
-    const { firstname, lastname }: any = { ...head };
-    const patient = { firstname: firstname, lastname: lastname };
-    return patient;
+  async findAll(): Promise<Object> {
+    try {
+      return await this.patientService.getAll();
+    } catch (error) {}
   }
 }
