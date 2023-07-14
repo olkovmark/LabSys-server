@@ -4,21 +4,25 @@ import { dbService } from 'src/db/db.service';
 @Injectable()
 export class AnalysesService {
   constructor(private dbService: dbService) {}
-  analyseDB = this.dbService.analyseDB;
+  analysisDB = this.dbService.analysisDB;
 
-  async add(analyse: any) {
-    if (Array.isArray(analyse)) {
+  async add(analysis: any) {
+    if (Array.isArray(analysis)) {
       let res = [];
-      for (const iterator of analyse) {
-        res.push(await this.analyseDB.add(iterator));
+      for (const iterator of analysis) {
+        res.push(await this.analysisDB.add(iterator));
       }
 
       return res;
     }
-    return this.analyseDB.add(analyse);
+    return this.analysisDB.add(analysis);
+  }
+
+  async get(id?: string) {
+    return this.analysisDB.get(id);
   }
 
   deleteAll() {
-    return this.analyseDB.deleteMany();
+    return this.analysisDB.deleteMany();
   }
 }

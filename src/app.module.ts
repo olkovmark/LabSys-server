@@ -6,6 +6,7 @@ import { DbModule } from './db/db.module';
 import { PatientsModule } from './patients/patients.module';
 
 import { AnalysesModule } from './analyses/analyses.module';
+import { ResearchesModule } from './researches/researches.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { AnalysesModule } from './analyses/analyses.module';
     DbModule,
     PatientsModule,
     AnalysesModule,
+    ResearchesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
