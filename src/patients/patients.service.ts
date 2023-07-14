@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Patient } from './patient.intrface';
+import { Patient } from './patient.interface';
 import { dbService } from 'src/db/db.service';
 
 @Injectable()

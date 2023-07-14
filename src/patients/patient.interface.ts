@@ -4,4 +4,5 @@ export interface Patient {
   birthDay: string;
   gender: string;
   id: Number;
+  contacts: any;
 }

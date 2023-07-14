@@ -1,7 +1,6 @@
 import { Mongoose } from 'mongoose';
 import { patientChema } from './chemas/patient.chema';
-import { Patient } from 'src/patients/patient.intrface';
-import { first } from 'rxjs';
+import { Patient } from 'src/patients/patient.interface';
 
 export class PatientDb {
   constructor(private mongoose: Mongoose) {}

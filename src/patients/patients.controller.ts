@@ -7,8 +7,7 @@ export class PatientsController {
 
   @Post()
   create(@Body() patient: Body) {
-    const res = this.patientService.add(patient);
-    return res;
+    return this.patientService.add(patient);
   }
 
   @Get()
