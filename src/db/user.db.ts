@@ -10,7 +10,9 @@ export class UserDb {
   async add(user: User) {
     const userModel = new this.UserModel(user);
     try {
-      return await userModel.save();
+      const { login, fullName } = await userModel.save();
+
+      return { login, fullName };
     } catch (error) {
       if (error.code == 11000)
         return { error: 'Dublicade key', key: { ...error.keyValue } };
@@ -18,9 +20,12 @@ export class UserDb {
     }
   }
 
-  async get(id?: string) {
+  async getById(id: string) {
     if (id) return await this.UserModel.findById(id);
     return await this.UserModel.find();
+  }
+  async get(filter: object) {
+    return await this.UserModel.find(filter);
   }
 
   async delete(obj?: string) {

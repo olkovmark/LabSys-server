@@ -7,8 +7,15 @@ export class UsersController {
   constructor(private service: UsersService) {}
 
   @Get(':id')
-  get(@Param('id') id: string) {
-    return this.service.findOne(id);
+  getById(@Param('id') id: string) {
+    return this.service.findById(id);
+  }
+
+  @Get()
+  get(@Body() body: User) {
+    const { password, ...user } = body;
+    console.log(user);
+    return this.service.find(user);
   }
 
   @Post()
