@@ -5,7 +5,7 @@ import { dbService } from './db.service';
 
 export class ResearchDb {
   constructor(private mongoose: Mongoose, private db: dbService) {}
-  ResearchModel = this.mongoose.model('Researches', researchChema);
+  model = this.mongoose.model('Researches', researchChema);
 
   async add(obj: any) {
     if (!obj.analysisID) return { error: 'AnalysisID error' };
@@ -22,23 +22,23 @@ export class ResearchDb {
     const isExistsResearch = await this.exist(obj);
     if (isExistsResearch) return { error: `${obj.name} already create` };
 
-    const research = new this.ResearchModel(obj);
+    const research = new this.model(obj);
     return await research.save();
   }
 
   async get(obj?: Research, projection?: Array<string>) {
-    return await this.ResearchModel.find(obj, projection);
+    return await this.model.find(obj, projection);
   }
 
   async getById(id: string, projection?: Array<string>) {
-    return await this.ResearchModel.findById(id, projection);
+    return await this.model.findById(id, projection);
   }
 
   async exist(obj: Research) {
-    return await this.ResearchModel.exists(obj);
+    return await this.model.exists(obj);
   }
 
   async delete(obj?: Research) {
-    return await this.ResearchModel.deleteMany(obj);
+    return await this.model.deleteMany(obj);
   }
 }
