@@ -17,8 +17,15 @@ export class AnalysisDb {
     }
   }
 
-  async get(id?: string, projection?: Array<string>) {
-    if (id) return await this.AnalysisModel.findById(id);
+  async get(id?: string, projection?: Array<string>, isExists?: boolean) {
+    if (id)
+      try {
+        if (isExists) return await this.AnalysisModel.exists({ _id: id });
+        return await this.AnalysisModel.findById(id, projection);
+      } catch (error) {
+        return { message: 'filed' };
+      }
+
     return await this.AnalysisModel.find();
   }
 

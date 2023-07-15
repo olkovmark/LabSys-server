@@ -1,14 +1,7 @@
-import {
-  Body,
-  Controller,
-  Get,
-  HttpCode,
-  HttpStatus,
-  UseGuards,
-} from '@nestjs/common';
+import { Body, Controller, Get } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { IsEmail, IsEmpty, IsNotEmpty, isEmpty } from 'class-validator';
-import { AuthGuard, IS_PUBLIC_KEY, Public } from './auth.guard';
+import { IsNotEmpty } from 'class-validator';
+import { Public } from './auth.guard';
 class userDTO {
   @IsNotEmpty({ context: 'consadasd' })
   login: string;
@@ -23,7 +16,6 @@ export class AuthController {
   @Public()
   @Get()
   auth(@Body() userd: userDTO) {
-    console.log(userd.password);
     return this.service.signIn(userd.login, userd.password);
   }
 }

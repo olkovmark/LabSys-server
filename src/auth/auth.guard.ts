@@ -21,6 +21,7 @@ export class AuthGuard implements CanActivate {
     private config: ConfigService,
   ) {}
   async canActivate(context: ExecutionContext): Promise<boolean> {
+    return true; // delete for Activate
     const isPublic = this.reflector.getAllAndOverride(IS_PUBLIC_KEY, [
       context.getHandler(),
       context.getClass(),
@@ -32,13 +33,10 @@ export class AuthGuard implements CanActivate {
     if (!token) {
       throw new UnauthorizedException();
     }
-
-    const secret = this.config.get('JWT');
     try {
       const payloud = await this.jwtService.verifyAsync(token, {
-        secret: secret,
+        secret: this.config.get('JWT'),
       });
-      console.log('payloud', payloud);
     } catch (error) {
       throw new UnauthorizedException();
     }

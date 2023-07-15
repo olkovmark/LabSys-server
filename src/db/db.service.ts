@@ -20,6 +20,6 @@ export class dbService {
 
   patientDB = new PatientDb(mongoose);
   analysisDB = new AnalysisDb(mongoose);
-  researchDB = new ResearchDb(mongoose);
+  researchDB = new ResearchDb(mongoose, this);
   userDB = new UserDb(mongoose);
 }

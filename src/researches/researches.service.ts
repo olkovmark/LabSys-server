@@ -6,20 +6,21 @@ export class ResearchesService {
   constructor(private dbService: dbService) {}
   researchDB = this.dbService.researchDB;
 
-  async add(analyse: any) {
-    if (Array.isArray(analyse)) {
+  async add(research: any) {
+    if (Array.isArray(research)) {
       let res = [];
-      for (const iterator of analyse) {
+      for (const iterator of research) {
         res.push(await this.researchDB.add(iterator));
       }
 
       return res;
     }
-    return this.researchDB.add(analyse);
+    return this.researchDB.add(research);
   }
 
   async get(id?: string) {
-    return this.researchDB.get(id);
+    if (id) return this.researchDB.getById(id);
+    return this.researchDB.get();
   }
   deleteAll() {}
 }
