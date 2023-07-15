@@ -7,6 +7,7 @@ import { AnalysisDb } from './analysis.db';
 import { ResearchDb } from './research.db';
 import { UserDb } from './user.db';
 import { ResearchResultDB } from './research-result.db';
+import { PatientAnalysisDB } from './patient-analysis';
 
 @Injectable()
 export class dbService {
@@ -24,4 +25,5 @@ export class dbService {
   researchDB = new ResearchDb(mongoose, this);
   userDB = new UserDb(mongoose);
   researchResultDB = new ResearchResultDB(mongoose);
+  patientAnalysisDB = new PatientAnalysisDB(mongoose);
 }

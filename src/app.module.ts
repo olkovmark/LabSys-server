@@ -11,6 +11,7 @@ import { LoggerMiddleware } from './middlewares/logger.middleware';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { ResearchResultesModule } from './research-resultes/research-resultes.module';
+import { PatientAnalysesModule } from './patient-analyses/patient-analyses.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { ResearchResultesModule } from './research-resultes/research-resultes.mo
     AuthModule,
     UsersModule,
     ResearchResultesModule,
+    PatientAnalysesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
