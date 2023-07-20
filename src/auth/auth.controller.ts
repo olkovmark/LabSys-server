@@ -1,4 +1,4 @@
-import { Body, Controller, Get } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { IsNotEmpty } from 'class-validator';
 import { Public } from './auth.guard';
@@ -14,7 +14,7 @@ export class AuthController {
   constructor(private service: AuthService) {}
 
   @Public()
-  @Get()
+  @Post()
   auth(@Body() userd: userDTO) {
     return this.service.signIn(userd.login, userd.password);
   }
