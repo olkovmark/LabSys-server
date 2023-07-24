@@ -21,12 +21,12 @@ export class AnalysisDb {
     if (id)
       try {
         if (isExists) return await this.AnalysisModel.exists({ _id: id });
-        return await this.AnalysisModel.findById(id, projection);
+        return await this.AnalysisModel.findById(id, [...projection]);
       } catch (error) {
         return { message: 'filed' };
       }
 
-    return await this.AnalysisModel.find();
+    return await this.AnalysisModel.find(null, 'name');
   }
 
   async deleteMany(obj?: Analyse) {
