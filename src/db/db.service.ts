@@ -16,7 +16,7 @@ export class dbService {
   }
 
   async connect() {
-    await mongoose.connect(this.configService.get('DATABASE'));
+    await mongoose.connect(process.env.DATABASE);
     console.log('MongoConnect');
   }
 

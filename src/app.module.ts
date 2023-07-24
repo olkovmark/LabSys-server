@@ -15,7 +15,7 @@ import { PatientAnalysesModule } from './patient-analyses/patient-analyses.modul
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ envFilePath: './config/config.env' }),
+    ConfigModule.forRoot(),
     DbModule,
     PatientsModule,
     AnalysesModule,
