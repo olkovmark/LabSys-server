@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
+  console.log('Start');
   const app = await NestFactory.create(AppModule, {
     logger: ['error', 'warn'],
   });
