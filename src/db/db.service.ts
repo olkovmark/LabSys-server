@@ -19,6 +19,7 @@ export class dbService {
     this.analysisDB = new AnalysisDb(
       this.dataSource.getRepository(AnalysisEntity),
     );
+    console.log('update');
   }
 
   userDb: UserDb;
