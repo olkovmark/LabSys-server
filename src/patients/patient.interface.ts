@@ -3,6 +3,6 @@ export interface Patient {
   lastName: string;
   birthDay: string;
   gender: string;
-  id: Number;
-  contacts: any;
+  id?: Number;
+  contacts?: any;
 }

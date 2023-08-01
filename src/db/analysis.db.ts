@@ -1,7 +1,7 @@
 import { Analysis } from 'src/analyses/analysis.interface';
 import { AnalysisEntity } from './entities/analysis.entity';
 
-export class AnalysisDb {
+export class AnalysisDB {
   rep: any;
   constructor(db: any) {
     this.rep = db.getRepository(AnalysisEntity);

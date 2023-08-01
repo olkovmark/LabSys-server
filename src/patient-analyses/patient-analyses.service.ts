@@ -15,8 +15,8 @@ export class PatientAnalysesService {
     return this.db.get();
   }
 
-  findOne(id: string) {
-    return this.db.getByID(id);
+  findOne(id: number) {
+    return this.db.getById(id);
   }
 
   update(id: number, dto: UpdatePatientAnalysisDto) {

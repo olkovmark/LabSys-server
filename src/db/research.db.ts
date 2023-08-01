@@ -2,7 +2,7 @@ import { ResearchEntity } from './entities/research.entity';
 import { Research } from 'src/researches/research.interface';
 import { Repository } from 'typeorm';
 
-export class ResearchDb {
+export class ResearchDB {
   rep: Repository<ResearchEntity>;
   constructor(db: any) {
     this.rep = db.getRepository(ResearchEntity);

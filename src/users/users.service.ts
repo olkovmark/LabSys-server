@@ -6,7 +6,7 @@ import * as bcrypt from 'bcrypt';
 @Injectable()
 export class UsersService {
   constructor(private db: dbService) {}
-  userDB = this.db.userDb;
+  userDB = this.db.userDB;
 
   async find(filters?: object): Promise<UserI[]> {
     return await this.userDB.get(filters);

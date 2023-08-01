@@ -1,28 +1,29 @@
-import { Mongoose } from 'mongoose';
-
 import { PatientAnalysis } from 'src/patient-analyses/patient-analysis.interface';
-import { PatientAnalysisChema } from './entities/patient-analysis.chema';
+import { PatientAnalysisEntity } from './entities/patient-analysis.entity';
+import { Repository } from 'typeorm';
 
 export class PatientAnalysisDB {
-  constructor(private mongoose: Mongoose) {}
-  model = this.mongoose.model('PatientAnalyses', PatientAnalysisChema);
-
+  rep: Repository<PatientAnalysisEntity>;
+  constructor(db: any) {
+    this.rep = db.getRepository(PatientAnalysisEntity);
+  }
   async add(obj: PatientAnalysis) {
-    const result = new this.model(obj);
-    return await result.save();
+    try {
+      return await this.rep.save(PatientAnalysisEntity.from(obj));
+    } catch (error) {
+      return error;
+    }
   }
 
-  async get(obj?: PatientAnalysis, projection?: Array<string>) {
-    return await this.model.find(obj, projection);
-  }
-  async getByID(id: string) {
-    return await this.model.findById(id);
+  async get() {
+    return await this.rep.find();
   }
 
-  async deleteMany(obj?: PatientAnalysis) {
-    return await this.model.deleteMany(obj);
+  async getById(id: number) {
+    return await this.rep.findOneBy({ id });
   }
-  async deleteById(id: string) {
-    return await this.model.findByIdAndDelete(id);
+
+  async delete(obj?: PatientAnalysis) {
+    // return await this.rep.remove();
   }
 }

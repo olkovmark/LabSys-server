@@ -1,28 +1,31 @@
 import { Mongoose } from 'mongoose';
 
-import { researchResultesChema } from './entities/research-result.chema';
-import { ResearchResult } from 'src/research-resultes/research-result.interface';
+import { ResearchResultEntity } from './entities/research-result.entity';
+
+import { Repository } from 'typeorm';
+import { ResearchResult } from 'src/research-results/research-result.interface';
 
 export class ResearchResultDB {
-  constructor(private mongoose: Mongoose) {}
-  model = this.mongoose.model('ResearchResultes', researchResultesChema);
-
-  async add(obj: ResearchResult) {
-    const result = new this.model(obj);
-    return await result.save();
+  rep: Repository<ResearchResultEntity>;
+  constructor(db: any) {
+    this.rep = db.getRepository(ResearchResultEntity);
   }
 
-  async get(obj?: ResearchResult, projection?: Array<string>) {
-    return await this.model.find(obj, projection);
-  }
-  async getByID(id: string) {
-    return await this.model.findById(id);
+  async add(user: ResearchResult) {
+    try {
+      return await this.rep.save(ResearchResultEntity.from(user));
+    } catch (err) {
+      return { error: err.detail };
+    }
   }
 
-  async deleteMany(obj?: ResearchResult) {
-    return await this.model.deleteMany(obj);
+  async getById(id: number) {
+    return this.rep.findOneBy({ id });
   }
-  async deleteById(id: string) {
-    return await this.model.findByIdAndDelete(id);
+
+  async get() {
+    return this.rep.find();
   }
+
+  async delete(obj?: string) {}
 }

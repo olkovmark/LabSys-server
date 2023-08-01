@@ -6,24 +6,19 @@ import { dbService } from 'src/db/db.service';
 export class PatientsService {
   constructor(private dbService: dbService) {}
 
-  patientBD = this.dbService.patientDB;
+  db = this.dbService.patientDB;
 
   async add(obj: any) {
     try {
-      const res = await this.patientBD.get(obj, ['_id']);
-      if (res.length > 0) throw { message: 'Patient was created', code: 101 };
-
-      return await this.patientBD.add(obj);
+      return await this.db.add(obj);
     } catch (error) {
       return error;
     }
   }
 
   async getAll(): Promise<Patient[]> {
-    return await this.patientBD.get();
+    return await this.db.get();
   }
 
-  async deleteAll() {
-    return await this.patientBD.delete();
-  }
+  async deleteAll() {}
 }

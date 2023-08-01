@@ -1,6 +1,6 @@
 export interface PatientAnalysis {
-  _id?: String;
-  patientID: String;
-  analysisID: String;
-  date: String;
+  _id?: string;
+  patientID: number;
+  analysisID: number;
+  date: string;
 }

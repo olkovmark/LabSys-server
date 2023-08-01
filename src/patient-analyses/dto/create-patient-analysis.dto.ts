@@ -3,9 +3,9 @@ import { PatientAnalysis } from '../patient-analysis.interface';
 
 export class CreatePatientAnalysisDto implements PatientAnalysis {
   @IsString()
-  patientID: String;
+  patientID: number;
   @IsString()
-  analysisID: String;
+  analysisID: number;
   @IsString()
-  date: String;
+  date: string;
 }

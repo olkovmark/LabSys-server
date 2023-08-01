@@ -6,8 +6,18 @@ import { ConfigModule } from '@nestjs/config';
 import { UserEntity } from './entities/user.entity';
 import { AnalysisEntity } from './entities/analysis.entity';
 import { ResearchEntity } from './entities/research.entity';
+import { ResearchResultEntity } from './entities/research-result.entity';
+import { PatientEntity } from './entities/patient.entity';
+import { PatientAnalysisEntity } from './entities/patient-analysis.entity';
 
-const entities = [UserEntity, AnalysisEntity, ResearchEntity];
+const entities = [
+  UserEntity,
+  PatientEntity,
+  PatientAnalysisEntity,
+  AnalysisEntity,
+  ResearchEntity,
+  ResearchResultEntity,
+];
 
 @Global()
 @Module({

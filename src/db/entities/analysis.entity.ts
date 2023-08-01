@@ -10,8 +10,8 @@ export class AnalysisEntity {
   name: string;
 
   static from(analysis: Analysis) {
-    const analysisEntity = new AnalysisEntity();
-    analysisEntity.name = analysis.name;
-    return analysisEntity;
+    const entity = new AnalysisEntity();
+    entity.name = analysis.name;
+    return entity;
   }
 }

@@ -1,8 +1,9 @@
 import { UserI } from 'src/users/user.interface';
 import { UserEntity } from './entities/user.entity';
+import { Repository } from 'typeorm';
 
-export class UserDb {
-  rep: any;
+export class UserDB {
+  rep: Repository<UserEntity>;
   constructor(db: any) {
     this.rep = db.getRepository(UserEntity);
   }

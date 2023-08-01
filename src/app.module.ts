@@ -7,11 +7,12 @@ import { PatientsModule } from './patients/patients.module';
 
 import { AnalysesModule } from './analyses/analyses.module';
 import { ResearchesModule } from './researches/researches.module';
-import { LoggerMiddleware } from './middlewares/logger.middleware';
+
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
-import { ResearchResultesModule } from './research-resultes/research-resultes.module';
+import { ResearchResultsModule } from './research-results/research-results.module';
 import { PatientAnalysesModule } from './patient-analyses/patient-analyses.module';
+import { LoggerMiddleware } from './middleware/logger.middleware';
 
 @Module({
   imports: [
@@ -22,7 +23,7 @@ import { PatientAnalysesModule } from './patient-analyses/patient-analyses.modul
     ResearchesModule,
     AuthModule,
     UsersModule,
-    ResearchResultesModule,
+    ResearchResultsModule,
     PatientAnalysesModule,
   ],
   controllers: [AppController],
