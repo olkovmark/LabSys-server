@@ -8,26 +8,21 @@ import { UserDb } from './user.db';
 import { ResearchResultDB } from './research-result.db';
 import { PatientAnalysisDB } from './patient-analysis';
 
-import { UserEntity } from './entities/user.entity';
 import { DataSource } from 'typeorm';
-import { AnalysisEntity } from './entities/analysis.entity';
 
 @Injectable()
 export class dbService {
   constructor(private dataSource: DataSource) {
-    this.userDb = new UserDb(this.dataSource.getRepository(UserEntity));
-    this.analysisDB = new AnalysisDb(
-      this.dataSource.getRepository(AnalysisEntity),
-    );
-    console.log('update');
+    this.userDb = new UserDb(this.dataSource);
+    this.analysisDB = new AnalysisDb(this.dataSource);
+    this.researchDB = new ResearchDb(this.dataSource);
   }
 
   userDb: UserDb;
   analysisDB: AnalysisDb;
+  researchDB: ResearchDb;
 
   patientDB = new PatientDb(mongoose);
-
-  researchDB = new ResearchDb(mongoose, this);
 
   researchResultDB = new ResearchResultDB(mongoose);
   patientAnalysisDB = new PatientAnalysisDB(mongoose);

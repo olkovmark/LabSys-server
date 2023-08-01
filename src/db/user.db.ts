@@ -1,12 +1,11 @@
-import { InjectRepository } from '@nestjs/typeorm';
 import { UserI } from 'src/users/user.interface';
-import { Repository } from 'typeorm';
 import { UserEntity } from './entities/user.entity';
 
 export class UserDb {
-  constructor(
-    @InjectRepository(UserEntity) private rep: Repository<UserEntity>,
-  ) {}
+  rep: any;
+  constructor(db: any) {
+    this.rep = db.getRepository(UserEntity);
+  }
 
   async add(user: UserI) {
     try {

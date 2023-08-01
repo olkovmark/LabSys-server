@@ -1,10 +1,11 @@
 import { Analysis } from 'src/analyses/analysis.interface';
 import { AnalysisEntity } from './entities/analysis.entity';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 
 export class AnalysisDb {
-  constructor(private rep: Repository<AnalysisEntity>) {}
+  rep: any;
+  constructor(db: any) {
+    this.rep = db.getRepository(AnalysisEntity);
+  }
 
   async add(analysis: Analysis) {
     try {

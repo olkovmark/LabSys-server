@@ -1,7 +1,7 @@
 import { Analysis } from 'src/analyses/analysis.interface';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity()
+@Entity('Analyses')
 export class AnalysisEntity {
   @PrimaryGeneratedColumn()
   id: number;

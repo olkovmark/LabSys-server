@@ -15,7 +15,7 @@ export class ResearchesController {
     return this.service.get();
   }
   @Get(':id')
-  get(@Param('id') id: string) {
+  get(@Param('id') id: number) {
     return this.service.get(id);
   }
 

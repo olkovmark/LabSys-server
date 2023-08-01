@@ -5,8 +5,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { UserEntity } from './entities/user.entity';
 import { AnalysisEntity } from './entities/analysis.entity';
+import { ResearchEntity } from './entities/research.entity';
 
-const entities = [UserEntity, AnalysisEntity];
+const entities = [UserEntity, AnalysisEntity, ResearchEntity];
 
 @Global()
 @Module({

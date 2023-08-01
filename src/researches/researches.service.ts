@@ -18,9 +18,10 @@ export class ResearchesService {
     return this.researchDB.add(research);
   }
 
-  async get(id?: string) {
+  async get(id?: number) {
     if (id) return this.researchDB.getById(id);
     return this.researchDB.get();
   }
+
   deleteAll() {}
 }
