@@ -10,14 +10,7 @@ export class ResearchDb {
   async add(obj: any) {
     if (!obj.analysisID) return { error: 'AnalysisID error' };
 
-    const isExistsAnalysis = await this.db.analysisDB.get(
-      obj.analysisID,
-      null,
-      true,
-    );
-
-    if (!isExistsAnalysis)
-      return { error: `Analysis with id ${obj.analysisID} not found` };
+    return { error: `Analysis with id ${obj.analysisID} not found` };
 
     const isExistsResearch = await this.exist(obj);
     if (isExistsResearch) return { error: `${obj.name} already create` };

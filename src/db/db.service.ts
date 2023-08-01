@@ -9,22 +9,23 @@ import { ResearchResultDB } from './research-result.db';
 import { PatientAnalysisDB } from './patient-analysis';
 
 import { UserEntity } from './entities/user.entity';
-import { DataSource, Repository } from 'typeorm';
-import { InjectRepository } from '@nestjs/typeorm';
+import { DataSource } from 'typeorm';
+import { AnalysisEntity } from './entities/analysis.entity';
 
 @Injectable()
 export class dbService {
-  constructor(
-    @InjectRepository(UserEntity)
-    usersRepository: Repository<UserEntity>,
-    private dataSource: DataSource,
-  ) {
-    this.userDb = new UserDb(usersRepository, dataSource);
+  constructor(private dataSource: DataSource) {
+    this.userDb = new UserDb(this.dataSource.getRepository(UserEntity));
+    this.analysisDB = new AnalysisDb(
+      this.dataSource.getRepository(AnalysisEntity),
+    );
   }
 
   userDb: UserDb;
+  analysisDB: AnalysisDb;
+
   patientDB = new PatientDb(mongoose);
-  analysisDB = new AnalysisDb(mongoose);
+
   researchDB = new ResearchDb(mongoose, this);
 
   researchResultDB = new ResearchResultDB(mongoose);

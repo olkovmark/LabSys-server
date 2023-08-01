@@ -1,15 +1,12 @@
 import { InjectRepository } from '@nestjs/typeorm';
-
 import { UserI } from 'src/users/user.interface';
-import { DataSource, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { UserEntity } from './entities/user.entity';
 
 export class UserDb {
   constructor(
     @InjectRepository(UserEntity) private rep: Repository<UserEntity>,
-    private dataSource: DataSource,
   ) {}
-  queryRunner = this.dataSource.createQueryRunner();
 
   async add(user: UserI) {
     try {
@@ -20,9 +17,15 @@ export class UserDb {
     }
   }
 
-  async getById(id: string) {}
+  async getById(id: number) {
+    return this.rep.findOneBy({ id });
+  }
 
-  async get(filter: object) {
+  async getByLogin(login: string) {
+    return this.rep.findOneBy({ login });
+  }
+
+  async get(filter: any) {
     return this.rep.find({ select: { id: true, login: true, fullName: true } });
   }
 

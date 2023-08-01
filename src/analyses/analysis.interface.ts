@@ -1,3 +1,3 @@
-export interface Analyse {
-  name: String;
+export interface Analysis {
+  name: string;
 }

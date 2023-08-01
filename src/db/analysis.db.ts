@@ -1,35 +1,32 @@
-import { Mongoose } from 'mongoose';
-import { Analyse } from 'src/analyses/analysis.interface';
-import { analyseChema } from './entities/analysis.chema';
+import { Analysis } from 'src/analyses/analysis.interface';
+import { AnalysisEntity } from './entities/analysis.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 export class AnalysisDb {
-  constructor(private mongoose: Mongoose) {}
-  AnalysisModel = this.mongoose.model('Analyses', analyseChema);
+  constructor(private rep: Repository<AnalysisEntity>) {}
 
-  async add(obj: Analyse) {
-    const analyse = new this.AnalysisModel(obj);
+  async add(analysis: Analysis) {
     try {
-      return await analyse.save();
-    } catch (error) {
-      if (error.code == 11000)
-        return { error: 'Dublicade key', name: { ...error.keyValue }.name };
-      return error;
+      return await this.rep.save(AnalysisEntity.from(analysis));
+    } catch (err) {
+      return { error: err.detail };
     }
   }
 
-  async get(id?: string, projection?: Array<string>, isExists?: boolean) {
-    if (id)
-      try {
-        if (isExists) return await this.AnalysisModel.exists({ _id: id });
-        return await this.AnalysisModel.findById(id, [...projection]);
-      } catch (error) {
-        return { message: 'filed' };
-      }
-
-    return await this.AnalysisModel.find(null, 'name');
+  async getByID(id: number) {
+    return this.rep.findOneBy({ id });
   }
 
-  async deleteMany(obj?: Analyse) {
-    return await this.AnalysisModel.deleteMany(obj);
+  async get(id?: string) {
+    try {
+      return await this.rep.find();
+    } catch (error) {
+      return { message: 'filed' };
+    }
+  }
+
+  async deleteMany(analysis?: Analysis) {
+    return await this.rep.delete({});
   }
 }

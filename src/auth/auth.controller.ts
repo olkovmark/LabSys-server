@@ -3,7 +3,7 @@ import { AuthService } from './auth.service';
 import { IsNotEmpty } from 'class-validator';
 import { Public } from './auth.guard';
 class userDTO {
-  @IsNotEmpty({ context: 'consadasd' })
+  @IsNotEmpty()
   login: string;
   @IsNotEmpty()
   password: string;
@@ -15,7 +15,7 @@ export class AuthController {
 
   @Public()
   @Post()
-  auth(@Body() userd: userDTO) {
-    return this.service.signIn(userd.login, userd.password);
+  auth(@Body() userDTO: userDTO) {
+    return this.service.signIn(userDTO.login, userDTO.password);
   }
 }

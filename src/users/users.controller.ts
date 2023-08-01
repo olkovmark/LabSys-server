@@ -7,7 +7,7 @@ export class UsersController {
   constructor(private service: UsersService) {}
 
   @Get(':id')
-  getById(@Param('id') id: string) {
+  getById(@Param('id') id: number) {
     return this.service.findById(id);
   }
 

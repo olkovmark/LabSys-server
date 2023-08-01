@@ -13,11 +13,10 @@ export class UsersService {
   }
 
   async findByLogin(login: string): Promise<UserI> {
-    const user = await this.userDB.get({ login: login });
-    return user[0];
+    return await this.userDB.getByLogin(login);
   }
 
-  async findById(userId: string) {
+  async findById(userId: number) {
     return this.userDB.getById(userId);
   }
 

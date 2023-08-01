@@ -4,6 +4,10 @@ import { dbService } from './db.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { UserEntity } from './entities/user.entity';
+import { AnalysisEntity } from './entities/analysis.entity';
+
+const entities = [UserEntity, AnalysisEntity];
+
 @Global()
 @Module({
   imports: [
@@ -13,10 +17,10 @@ import { UserEntity } from './entities/user.entity';
       url: process.env.DATABASE,
       ssl: true,
       autoLoadEntities: true,
-      entities: [UserEntity],
+      entities,
       synchronize: true,
     }),
-    TypeOrmModule.forFeature([UserEntity]),
+    TypeOrmModule.forFeature(entities),
   ],
   providers: [dbService],
   exports: [dbService],
