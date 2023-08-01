@@ -1,34 +1,30 @@
-import { Mongoose } from 'mongoose';
+import { InjectRepository } from '@nestjs/typeorm';
 
-import { userChema } from './chemas/user.chema';
-import { User } from 'src/users/user.intrface';
+import { UserI } from 'src/users/user.interface';
+import { DataSource, Repository } from 'typeorm';
+import { UserEntity } from './entities/user.entity';
 
 export class UserDb {
-  constructor(private mongoose: Mongoose) {}
-  UserModel = this.mongoose.model('Users', userChema);
+  constructor(
+    @InjectRepository(UserEntity) private rep: Repository<UserEntity>,
+    private dataSource: DataSource,
+  ) {}
+  queryRunner = this.dataSource.createQueryRunner();
 
-  async add(user: User) {
-    const userModel = new this.UserModel(user);
+  async add(user: UserI) {
     try {
-      const { login, fullName } = await userModel.save();
-
-      return { login, fullName };
-    } catch (error) {
-      if (error.code == 11000)
-        return { error: 'Dublicade key', key: { ...error.keyValue } };
-      return error;
+      const { password, ...res } = await this.rep.save(UserEntity.from(user));
+      return res;
+    } catch (err) {
+      return { error: err.detail };
     }
   }
 
-  async getById(id: string) {
-    if (id) return await this.UserModel.findById(id);
-    return await this.UserModel.find();
-  }
+  async getById(id: string) {}
+
   async get(filter: object) {
-    return await this.UserModel.find(filter);
+    return this.rep.find({ select: { id: true, login: true, fullName: true } });
   }
 
-  async delete(obj?: string) {
-    return await this.UserModel.deleteMany();
-  }
+  async delete(obj?: string) {}
 }

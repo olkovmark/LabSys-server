@@ -1,6 +1,6 @@
 import { Mongoose } from 'mongoose';
 import { Analyse } from 'src/analyses/analysis.interface';
-import { analyseChema } from './chemas/analysis.chema';
+import { analyseChema } from './entities/analysis.chema';
 
 export class AnalysisDb {
   constructor(private mongoose: Mongoose) {}

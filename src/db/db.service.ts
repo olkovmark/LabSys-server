@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 import mongoose from 'mongoose';
 
 import { PatientDb } from './patient.db';
@@ -9,21 +8,25 @@ import { UserDb } from './user.db';
 import { ResearchResultDB } from './research-result.db';
 import { PatientAnalysisDB } from './patient-analysis';
 
+import { UserEntity } from './entities/user.entity';
+import { DataSource, Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
+
 @Injectable()
 export class dbService {
-  constructor(private configService: ConfigService) {
-    this.connect();
+  constructor(
+    @InjectRepository(UserEntity)
+    usersRepository: Repository<UserEntity>,
+    private dataSource: DataSource,
+  ) {
+    this.userDb = new UserDb(usersRepository, dataSource);
   }
 
-  async connect() {
-    await mongoose.connect(process.env.DATABASE);
-    console.log('MongoConnect');
-  }
-
+  userDb: UserDb;
   patientDB = new PatientDb(mongoose);
   analysisDB = new AnalysisDb(mongoose);
   researchDB = new ResearchDb(mongoose, this);
-  userDB = new UserDb(mongoose);
+
   researchResultDB = new ResearchResultDB(mongoose);
   patientAnalysisDB = new PatientAnalysisDB(mongoose);
 }

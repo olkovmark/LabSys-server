@@ -8,3 +8,4 @@ export const analyseChema = new mongoose.Schema<Analyse>({
     required: true, // Можно также указать, что поле обязательно для заполнения
   },
 });
+const t = 'entity';

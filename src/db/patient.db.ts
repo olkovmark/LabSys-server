@@ -1,5 +1,5 @@
 import { Mongoose } from 'mongoose';
-import { patientChema } from './chemas/patient.chema';
+import { patientChema } from './entities/patient.chema';
 import { Patient } from 'src/patients/patient.interface';
 
 export class PatientDb {

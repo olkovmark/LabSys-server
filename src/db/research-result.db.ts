@@ -1,6 +1,6 @@
 import { Mongoose } from 'mongoose';
 
-import { researchResultesChema } from './chemas/research-result.chema';
+import { researchResultesChema } from './entities/research-result.chema';
 import { ResearchResult } from 'src/research-resultes/research-result.interface';
 
 export class ResearchResultDB {

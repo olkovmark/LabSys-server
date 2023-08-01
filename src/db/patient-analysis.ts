@@ -1,7 +1,7 @@
 import { Mongoose } from 'mongoose';
 
 import { PatientAnalysis } from 'src/patient-analyses/patient-analysis.interface';
-import { PatientAnalysisChema } from './chemas/patient-analysis.chema';
+import { PatientAnalysisChema } from './entities/patient-analysis.chema';
 
 export class PatientAnalysisDB {
   constructor(private mongoose: Mongoose) {}

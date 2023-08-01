@@ -1,5 +1,5 @@
 import { Mongoose } from 'mongoose';
-import { researchChema } from './chemas/research.chema';
+import { researchChema } from './entities/research.chema';
 import { Research } from 'src/researches/research.interface';
 import { dbService } from './db.service';
 

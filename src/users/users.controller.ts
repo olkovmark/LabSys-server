@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
-import { User } from './user.intrface';
+import { UserI } from './user.interface';
 import { UsersService } from './users.service';
 
 @Controller('users')
@@ -12,14 +12,13 @@ export class UsersController {
   }
 
   @Get()
-  get(@Body() body: User) {
+  get(@Body() body: UserI) {
     const { password, ...user } = body;
-    console.log(user);
     return this.service.find(user);
   }
 
   @Post()
-  create(@Body() user: User) {
+  create(@Body() user: UserI) {
     return this.service.create(user);
   }
 }
